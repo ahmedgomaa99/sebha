@@ -8,14 +8,15 @@
   "theme_color": "#5a2423",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true",
       "sizes": "512x512",
       "type": "image/png"
     }
   ]
 }
+
