@@ -1,7 +1,7 @@
 {
   "name": "سبحة",
   "short_name": "سبحة",
-  "start_url": "https://ahmedgomaa99.github.io/sebha/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0d6efd",
@@ -18,3 +18,4 @@
     }
   ]
 }
+
