@@ -1,11 +1,10 @@
 {
-  "name": "سبحة إلكترونية",
+  "name": "سبحة",
   "short_name": "سبحة",
-  "description": "سبحة إلكترونية لحفظ عدد التسبيحات",
-  "start_url": ".",
+  "start_url": "https://ahmedgomaa99.github.io/sebha/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#5a2423",
+  "theme_color": "#0d6efd",
   "icons": [
     {
       "src": "https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true",
@@ -19,4 +18,3 @@
     }
   ]
 }
-
