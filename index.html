@@ -9,7 +9,6 @@
 <link rel="manifest" href="manifest.json">
 
 <meta name="theme-color" content="#5a2423">
-
 <title>سبحة إلكترونية</title>
 
 <style>
@@ -46,6 +45,7 @@ html, body {
   justify-content: center;
   align-items: center;
   font-size: 8rem;
+  color: #220b0b;
   background: rgba(255,255,255,0.6);
   border-radius: 50%;
   cursor: pointer;
@@ -122,30 +122,24 @@ html, body {
 
 <script>
 let count = 0;
-let lastTap = 0;
-
 const counter = document.getElementById('counter');
 const modal = document.getElementById('confirmModal');
 const confirmYes = document.getElementById('confirmYes');
 const confirmNo = document.getElementById('confirmNo');
 
-// تحميل الرقم المحفوظ
+// تحميل العدد المحفوظ
 if (localStorage.getItem('count')) {
   count = parseInt(localStorage.getItem('count'));
   counter.innerText = count;
 }
 
-// العد عند اللمس
-counter.addEventListener('pointerdown', () => {
-  const now = Date.now();
-  if (now - lastTap < 150) return;
-  lastTap = now;
-
+// العد عند الضغط
+counter.addEventListener('click', () => {
   count++;
   counter.innerText = count;
   localStorage.setItem('count', count);
 
-  // اهتزاز كل 100 عدة
+  // اهتزاز كل 100
   if (count % 100 === 0 && navigator.vibrate) {
     navigator.vibrate([200, 80, 200]);
   }
@@ -158,6 +152,7 @@ function resetCounter() {
   }
 }
 
+// تأكيد التصفير
 confirmYes.addEventListener('click', () => {
   count = 0;
   counter.innerText = count;
@@ -165,6 +160,7 @@ confirmYes.addEventListener('click', () => {
   closeModal();
 });
 
+// إلغاء
 confirmNo.addEventListener('click', closeModal);
 
 function closeModal() {
