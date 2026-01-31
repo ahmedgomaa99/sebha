@@ -283,13 +283,24 @@ if ('serviceWorker' in navigator) {
   }
 
   // الضغط على الزر الكبير للعد
-  counter.addEventListener('click', () => {
-    count++;
-    counter.innerText = count;
-    localStorage.setItem('count', count); // حفظ العدد
-    counter.style.transform = 'scale(1.1)';
-    setTimeout(() => counter.style.transform = 'scale(1)', 150);
-  });
+ counter.addEventListener('click', () => {
+
+  count++;                          // 1️⃣ زيادة العداد
+  counter.innerText = count;        // 2️⃣ تحديث الرقم
+  localStorage.setItem('count', count); // 3️⃣ حفظ العدد
+
+  // 4️⃣ اهتزاز كل 100 عدة
+  if (count % 100 === 0) {
+    if (navigator.vibrate) {
+      navigator.vibrate([150, 50, 150]);
+    }
+  }
+
+  // 5️⃣ تأثير الضغط
+  counter.style.transform = 'scale(1.1)';
+  setTimeout(() => counter.style.transform = 'scale(1)', 150);
+
+});
 
   // زر إعادة التصفير
   function resetCounter() {
@@ -366,6 +377,7 @@ function closeModal() {
 
 </body>
 </html>
+
 
 
 
