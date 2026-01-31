@@ -307,22 +307,7 @@ if ('serviceWorker' in navigator) {
 
 
 
- counter.addEventListener('click', () => {
-  count++;
-  counter.innerText = count;
-  localStorage.setItem('count', count);
-
-  // اهتزاز كل 100 عدة
-  if (count % 100 === 0) {
-    if (navigator.vibrate) {
-      navigator.vibrate([150, 50, 150]); // نمط اهتزاز واضح
-    }
-  }
-
-  counter.style.transform = 'scale(1.1)';
-  setTimeout(() => counter.style.transform = 'scale(1)', 150);
-});
-
+ 
 
 
 
@@ -408,6 +393,7 @@ function closeModal() {
 
 </body>
 </html>
+
 
 
 
