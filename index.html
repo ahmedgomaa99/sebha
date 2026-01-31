@@ -3,266 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="icon" href="https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true" type="image/png">
 <link rel="apple-touch-icon" href="https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true">
 <link rel="manifest" href="manifest.json">
 
-  <meta name="theme-color" content="#5a2423">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5a2423">
 
 <title>سبحة إلكترونية</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Alexandria&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria&display=swap');
 
-  /* منع التمرير */
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden; /* يمنع scroll */
-    font-family: 'Montserrat', sans-serif;
-    background-image: url('https://plus.unsplash.com/premium_photo-1676929390422-ff50ebed07ec?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    scrollbar-width: none;
-    user-select: none; /* Chrome, Safari, Edge */
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE/Edge */
-    cursor: default; /* تغيير شكل المؤشر */  
-
-  }
-  ::selection {
-  background: none; /* إزالة التظليل عند الاختيار */
-}
-.counter,.reset-btn {
-  -webkit-tap-highlight-color: transparent; /* Safari و Chrome على الموبايل */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE/Edge */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  background-image: url('https://plus.unsplash.com/premium_photo-1676929390422-ff50ebed07ec');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none;
-  outline: none; /* إزالة إطار التركيز */
 }
 
-  /* الحاوية للزر الكبير وزر إعادة التصفير */
-  .container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  width: 90vw;      /* يزيد العرض */
-  max-width: 400px; /* حد أقصى أنيق */
 }
 
-.counter,.reset-btn:focus {
-  outline: none;
-}
-
-.counter,.reset-btn::selection {
-  background: none;
-}
-
-  /* الزر الكبير */
-  .counter {
-    width: 70vw;
-    max-width: 300px;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 8rem;
-    color: #220b0b;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-    backdrop-filter: blur(15px);
-    text-align: center;
-    line-height: 1;
-    transition: transform 0.15s ease-in-out; /* السلاسة */
-    transform-origin: center; /* التكبير من المنتصف */
-    cursor: pointer;
-
-
-  }
-
-  .counter:active {
-    transform: scale(1.1);
-  }
-
-  /* زر إعادة التصفير صغير دائري مع أيقونة */
-  .reset-btn {
-    width: 60px;
-    height: 60px;
-    padding: 0;
-    font-size: 0;
-    border: none;
-    border-radius: 50%;
-    background: rgba(90, 36, 35, 0.7);
-    color: white;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    backdrop-filter: blur(10px);
-    transition: transform 0.1s, box-shadow 0.1s;
-  }
-
-  .reset-btn:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-
-  /* الأيقونة داخل الزر */
-  .reset-btn img {
-    width: 30px;
-    height: 30px;
-  }
-
-  /* متجاوب */
-  @media (max-width: 500px) {
-    .counter {
-      width: 80vw;
-      font-size: 6rem;
-    }
-    .reset-btn {
-      width: 50px;
-      height: 50px;
-    }
-    .reset-btn img {
-      width: 25px;
-      height: 25px;
-    }
-  }
-
-
-  /* المودال */
-.modal {
-  display: none; /* مخفي افتراضيًا */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  backdrop-filter: blur(6px);
+.counter {
+  width: 70vw;
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  font-family: 'Marhey', sans-serif;
+  font-size: 8rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform .15s;
+}
 
+.counter:active {
+  transform: scale(1.1);
+}
+
+.reset-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(90,36,35,.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.reset-btn img {
+  width: 30px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal.show {
   display: flex;
-  opacity: 1;
 }
 
 .modal-content {
-  background: rgba(255,255,255,0.95);
-  padding: 25px 30px;
-  border-radius: 20px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
   text-align: center;
-  font-family: 'Alexandria', sans-serif; /* تم تغيير الخط هنا */
-  color: #220b0b;
-  max-width: 320px;
-  width: 80%;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-  transform: scale(0.8);
-  transition: transform 0.3s ease;
-}
-
-.modal.show .modal-content {
-  transform: scale(1);
-}
-
-.modal-content h3 {
-  margin: 0 0 10px;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.modal-content p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-family: 'Alexandria', sans-serif;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 15px;
 }
-
-.modal-buttons button {
-  padding: 10px 25px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-family: 'Alexandria', sans-serif; /* تم تغيير الخط هنا */
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-#confirmYes {
-  background-color: #5a2423;
-  color: #fff;
-}
-
-#confirmNo {
-  background-color: #ccc;
-  color: #220b0b;
-}
-
-.modal-buttons button:hover {
-  filter: brightness(1.1);
-}
-
-.modal-buttons button:active {
-  transform: scale(0.95);
-}
-
 </style>
 </head>
-
-
-
-
-<!-- إضافة مودال التحذير داخل الـ body -->
-
-
-<style>
-/* المودال */
-
-</style>
-
-
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js');
-}
-</script>
-
-
-
-
-
 
 <body>
 
 <div class="container">
   <div class="counter" id="counter">0</div>
   <button class="reset-btn" onclick="resetCounter()">
-    <img src="https://img.icons8.com/sf-black-filled/64/FFFFFF/recurring-appointment.png" alt="إعادة التصفير">
+    <img src="https://img.icons8.com/sf-black-filled/64/FFFFFF/recurring-appointment.png">
   </button>
 </div>
+
 <div id="confirmModal" class="modal">
   <div class="modal-content">
     <p>البدء من جديد؟</p>
@@ -272,78 +119,45 @@ if ('serviceWorker' in navigator) {
     </div>
   </div>
 </div>
+
 <script>
-  let count = 0;
-  const counter = document.getElementById('counter');
+let count = 0;
+let lastTap = 0;
 
-  // استرجاع العدد من LocalStorage عند تحميل الصفحة
-  if (localStorage.getItem('count')) {
-    count = parseInt(localStorage.getItem('count'));
-    counter.innerText = count;
-  }
-
-  // الضغط على الزر الكبير للعد
-  counter.addEventListener('click', () => {
-    count++;
-    counter.innerText = count;
-    localStorage.setItem('count', count); // حفظ العدد
-    counter.style.transform = 'scale(1.1)';
-    setTimeout(() => counter.style.transform = 'scale(1)', 150);
-
-    
- 
-
-
-
-      
-});
-
-
-    
-  });
-
-  // زر إعادة التصفير
-  function resetCounter() {
-    count = 0;
-    counter.innerText = count;
-    localStorage.setItem('count', count); // تحديث التخزين
-  }
-
-  // منع النقر بزر الفأرة الأيمن
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-  // منع استخدام اختصارات النسخ أو الطباعة
-  document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey && e.key === 'c') ||  // Ctrl+C
-        (e.ctrlKey && e.key === 'x') ||  // Ctrl+X
-        (e.ctrlKey && e.key === 'p') ||  // Ctrl+P
-        (e.ctrlKey && e.key === 'u')) {  // Ctrl+U
-      e.preventDefault();
-    }
-  });
-
-  // منع السحب والإفلات للنصوص أو الصور
-  document.addEventListener('dragstart', function(e) {
-    e.preventDefault();
-  });
-
-
+const counter = document.getElementById('counter');
 const modal = document.getElementById('confirmModal');
 const confirmYes = document.getElementById('confirmYes');
 const confirmNo = document.getElementById('confirmNo');
 
+// تحميل الرقم المحفوظ
+if (localStorage.getItem('count')) {
+  count = parseInt(localStorage.getItem('count'));
+  counter.innerText = count;
+}
+
+// العد عند اللمس
+counter.addEventListener('pointerdown', () => {
+  const now = Date.now();
+  if (now - lastTap < 150) return;
+  lastTap = now;
+
+  count++;
+  counter.innerText = count;
+  localStorage.setItem('count', count);
+
+  // اهتزاز كل 100 عدة
+  if (count % 100 === 0 && navigator.vibrate) {
+    navigator.vibrate([200, 80, 200]);
+  }
+});
+
+// زر إعادة التصفير
 function resetCounter() {
   if (count !== 0) {
-
-
-  modal.classList.add('show'); // إظهار المودال بأنيق
-
+    modal.classList.add('show');
   }
 }
 
-// الضغط على "نعم"
 confirmYes.addEventListener('click', () => {
   count = 0;
   counter.innerText = count;
@@ -351,40 +165,15 @@ confirmYes.addEventListener('click', () => {
   closeModal();
 });
 
-// الضغط على "إلغاء"
-confirmNo.addEventListener('click', () => {
-  closeModal();
-});
+confirmNo.addEventListener('click', closeModal);
 
-// إغلاق المودال بالنقر خارج المحتوى
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    closeModal();
-  }
-});
-
-// دالة إغلاق المودال بسلاسة
 function closeModal() {
   modal.classList.remove('show');
 }
 
-
-
-
-
+// منع كليك يمين
+document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
-
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
