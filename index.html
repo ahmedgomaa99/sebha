@@ -296,7 +296,7 @@ if ('serviceWorker' in navigator) {
   localStorage.setItem('count', count);
 
   // اهتزاز كل 100 عدة
-  if (count % 100 === 0) {
+  if (count % 2 === 0) {
     if (navigator.vibrate) {
       navigator.vibrate([150, 50, 150]); // نمط اهتزاز واضح
     }
@@ -385,6 +385,7 @@ function closeModal() {
 
 </body>
 </html>
+
 
 
 
