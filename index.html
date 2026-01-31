@@ -7,8 +7,8 @@
 <link rel="icon" href="https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true" type="image/png">
 <link rel="apple-touch-icon" href="https://github.com/ahmedgomaa99/sebha/blob/main/8.png?raw=true">
 <link rel="manifest" href="manifest.json">
-
 <meta name="theme-color" content="#5a2423">
+
 <title>سبحة إلكترونية</title>
 
 <style>
@@ -21,7 +21,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
-  background-image: url('https://plus.unsplash.com/premium_photo-1676929390422-ff50ebed07ec');
+  background-image: url('https://plus.unsplash.com/premium_photo-1676929390422-ff50ebed07ec?q=80&w=387&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -30,17 +30,21 @@ html, body {
   user-select: none;
 }
 
+::selection { background: none; }
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  width: 90vw;
+  max-width: 400px;
 }
 
 .counter {
   width: 70vw;
   max-width: 300px;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,20 +52,20 @@ html, body {
   color: #220b0b;
   background: rgba(255,255,255,0.6);
   border-radius: 50%;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  backdrop-filter: blur(15px);
   cursor: pointer;
-  transition: transform .15s;
+  transition: transform 0.15s ease-in-out;
 }
 
-.counter:active {
-  transform: scale(1.1);
-}
+.counter:active { transform: scale(1.1); }
 
 .reset-btn {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
   border: none;
-  background: rgba(90,36,35,.7);
+  border-radius: 50%;
+  background: rgba(90,36,35,0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,35 +74,62 @@ html, body {
 
 .reset-btn img {
   width: 30px;
+  height: 30px;
 }
 
+/* المودال */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.4);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
-.modal.show {
-  display: flex;
-}
+.modal.show { display: flex; }
 
 .modal-content {
   background: #fff;
-  padding: 25px;
-  border-radius: 15px;
+  padding: 25px 30px;
+  border-radius: 20px;
   text-align: center;
   font-family: 'Alexandria', sans-serif;
+  max-width: 320px;
+  width: 80%;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 15px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#confirmYes {
+  background: #5a2423;
+  color: #fff;
+}
+
+#confirmNo {
+  background: #ccc;
 }
 </style>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js');
+}
+</script>
 </head>
 
 <body>
@@ -124,51 +155,46 @@ html, body {
 let count = 0;
 const counter = document.getElementById('counter');
 const modal = document.getElementById('confirmModal');
-const confirmYes = document.getElementById('confirmYes');
-const confirmNo = document.getElementById('confirmNo');
+const yesBtn = document.getElementById('confirmYes');
+const noBtn = document.getElementById('confirmNo');
 
-// تحميل العدد المحفوظ
+/* تحميل القيمة */
 if (localStorage.getItem('count')) {
-  count = parseInt(localStorage.getItem('count'));
+  count = +localStorage.getItem('count');
   counter.innerText = count;
 }
 
-// العد عند الضغط
+/* العد */
 counter.addEventListener('click', () => {
   count++;
   counter.innerText = count;
   localStorage.setItem('count', count);
 
-  // اهتزاز كل 100
   if (count % 100 === 0 && navigator.vibrate) {
-    navigator.vibrate([200, 80, 200]);
+    navigator.vibrate([200,80,200]);
   }
 });
 
-// زر إعادة التصفير
+/* فتح المودال */
 function resetCounter() {
-  if (count !== 0) {
-    modal.classList.add('show');
-  }
+  if (count !== 0) modal.classList.add('show');
 }
 
-// تأكيد التصفير
-confirmYes.addEventListener('click', () => {
+/* تأكيد */
+yesBtn.onclick = () => {
   count = 0;
-  counter.innerText = count;
-  localStorage.setItem('count', count);
-  closeModal();
-});
-
-// إلغاء
-confirmNo.addEventListener('click', closeModal);
-
-function closeModal() {
+  counter.innerText = 0;
+  localStorage.setItem('count', 0);
   modal.classList.remove('show');
-}
+};
 
-// منع كليك يمين
-document.addEventListener('contextmenu', e => e.preventDefault());
+/* إلغاء */
+noBtn.onclick = () => modal.classList.remove('show');
+
+/* غلق عند الضغط خارج */
+window.onclick = e => {
+  if (e.target === modal) modal.classList.remove('show');
+};
 </script>
 
 </body>
