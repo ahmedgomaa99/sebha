@@ -1,4 +1,4 @@
-const CACHE_NAME = "sebha-cache-v2";
+const CACHE_NAME = "sebha-cache-v3";
 
 const FILES_TO_CACHE = [
   "./",
@@ -46,4 +46,5 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
