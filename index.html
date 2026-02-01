@@ -300,7 +300,7 @@ counter.addEventListener('click', () => {
   if (navigator.vibrate) {
 
     // 🎉 عند كل 1000
-    if (count % 2 === 0) {
+    if (count % 1000 === 0) {
       navigator.vibrate([600, 100, 600, 100, 600]);
       showCelebrateModal(count);
     }
@@ -424,6 +424,7 @@ celebrateOk.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
