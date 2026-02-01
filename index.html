@@ -299,8 +299,17 @@ counter.addEventListener('click', () => {
 
   if (navigator.vibrate) {
 
+    if (count === 10000) {
+      navigator.vibrate([800, 100, 800, 100, 800]);
+      showCelebrateModal(10000);
+       count = 0;
+        counter.innerText = count;
+       localStorage.setItem('count', count);
+      
+    }  
+
     // 🎉 عند كل 1000
-    if (count % 1000 === 0) {
+   else if (count % 1000 === 0) {
       navigator.vibrate([600, 100, 600, 100, 600]);
       showCelebrateModal(count);
     }
@@ -424,6 +433,7 @@ celebrateOk.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
