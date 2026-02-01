@@ -1,9 +1,48 @@
-self.addEventListener("install", e => {
+const CACHE_NAME = "sebha-cache-v1";
+
+const FILES_TO_CACHE = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./service-worker.js",
+  "./recurring-appointment.png",
+  "./back.jfif",
+  "./8.png",
+
+  // لو عندك أي ملفات محلية ضيفها هنا
+];
+
+// عند التثبيت
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
   self.skipWaiting();
 });
 
-self.addEventListener("fetch", e => {
-  e.respondWith(
-    fetch(e.request).catch(() => new Response("Offline"))
+// عند التفعيل
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+// عند أي طلب
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
   );
 });
