@@ -283,23 +283,26 @@ if ('serviceWorker' in navigator) {
   }
 
   // الضغط على الزر الكبير للعد
- counter.addEventListener('click', () => {
+counter.addEventListener('click', () => {
 
-  count++;                          // 1️⃣ زيادة العداد
-  counter.innerText = count;        // 2️⃣ تحديث الرقم
-  localStorage.setItem('count', count); // 3️⃣ حفظ العدد
+  count++;
+  counter.innerText = count;
+  localStorage.setItem('count', count);
 
-  // 4️⃣ اهتزاز كل 100 عدة
   if (navigator.vibrate) {
+
+    // 🎉 عند كل 1000
     if (count % 1000 === 0) {
-      navigator.vibrate(800);
-    } else if (count % 100 === 0) {
-      navigator.vibrate(180);
+      navigator.vibrate([400, 100, 400, 100, 400]);
+      showCelebrateModal(count);
+    }
+
+    // 🔔 عند كل 100
+    else if (count % 100 === 0) {
+      navigator.vibrate(150);
     }
   }
 
-
-  // 5️⃣ تأثير الضغط
   counter.style.transform = 'scale(1.1)';
   setTimeout(() => counter.style.transform = 'scale(1)', 150);
 
@@ -373,13 +376,55 @@ function closeModal() {
 
 
 
+ // رسائل التهنئة
+ 
+
+const celebrateModal = document.getElementById('celebrateModal');
+const celebrateOk = document.getElementById('celebrateOk');
+const thousandCount = document.getElementById('thousandCount');
+
+function showCelebrateModal(count) {
+  thousandCount.innerText = count;
+  celebrateModal.classList.add('show');
+}
+
+// إغلاق رسالة التهنئة
+celebrateOk.addEventListener('click', () => {
+  celebrateModal.classList.remove('show');
+});
+
+
 
 
 </script>
 
 
+
+
+
+  <div id="celebrateModal" class="modal">
+  <div class="modal-content">
+    <h3>🎉 مبروك 🎉</h3>
+    <p>وصلت إلى <span id="thousandCount"></span> تسبيحة</p>
+    <div class="modal-buttons">
+      <button id="celebrateOk">حسنًا</button>
+    </div>
+  </div>
+</div>
+<div style="
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+">
+  © All Rights Reserved | Ahmed Gomaa
+</div>
+
 </body>
 </html>
+
 
 
 
