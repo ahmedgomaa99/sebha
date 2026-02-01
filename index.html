@@ -290,11 +290,14 @@ if ('serviceWorker' in navigator) {
   localStorage.setItem('count', count); // 3️⃣ حفظ العدد
 
   // 4️⃣ اهتزاز كل 100 عدة
-  if (count % 100 === 0) {
-    if (navigator.vibrate) {
-      navigator.vibrate([150, 50, 150]);
+  if (navigator.vibrate) {
+    if (count % 1000 === 0) {
+      navigator.vibrate(800);
+    } else if (count % 100 === 0) {
+      navigator.vibrate(180);
     }
   }
+
 
   // 5️⃣ تأثير الضغط
   counter.style.transform = 'scale(1.1)';
@@ -377,6 +380,7 @@ function closeModal() {
 
 </body>
 </html>
+
 
 
 
