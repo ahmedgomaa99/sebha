@@ -211,6 +211,10 @@
   transition: all 0.15s ease;
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
+#celebrateOk {
+  background-color: #5a2423;
+  color: #fff;
+}
 
 #confirmYes {
   background-color: #5a2423;
@@ -236,15 +240,6 @@
 
 
 
-<!-- إضافة مودال التحذير داخل الـ body -->
-
-
-<style>
-/* المودال */
-
-</style>
-
-
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js');
@@ -257,6 +252,18 @@ if ('serviceWorker' in navigator) {
 
 
 <body>
+
+
+  <div id="celebrateModal" class="modal">
+  <div class="modal-content">
+    <h3>🎉 مبروك 🎉</h3>
+    <p>وصلت إلى <span id="thousandCount"></span> تسبيحة</p>
+    <div class="modal-buttons">
+      <button id="celebrateOk">حسنًا</button>
+    </div>
+  </div>
+</div>
+
 
 <div class="container">
   <div class="counter" id="counter">0</div>
@@ -293,8 +300,8 @@ counter.addEventListener('click', () => {
   if (navigator.vibrate) {
 
     // 🎉 عند كل 1000
-    if (count % 1000 === 0) {
-      navigator.vibrate([400, 100, 400, 100, 400]);
+    if (count % 2 === 0) {
+      navigator.vibrate([600, 100, 600, 100, 600]);
       showCelebrateModal(count);
     }
 
@@ -403,15 +410,7 @@ celebrateOk.addEventListener('click', () => {
 
 
 
-  <div id="celebrateModal" class="modal">
-  <div class="modal-content">
-    <h3>🎉 مبروك 🎉</h3>
-    <p>وصلت إلى <span id="thousandCount"></span> تسبيحة</p>
-    <div class="modal-buttons">
-      <button id="celebrateOk">حسنًا</button>
-    </div>
-  </div>
-</div>
+  
 <div style="
   position: fixed;
   bottom: 10px;
