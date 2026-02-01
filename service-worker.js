@@ -1,4 +1,4 @@
-const CACHE_NAME = "sebha-cache-v1";
+const CACHE_NAME = "sebha-cache-v2";
 
 const FILES_TO_CACHE = [
   "./",
@@ -7,7 +7,7 @@ const FILES_TO_CACHE = [
   "./service-worker.js",
   "./recurring-appointment.png",
   "./back.jfif",
-  "./8.png",
+  "./8.png"
 
   // لو عندك أي ملفات محلية ضيفها هنا
 ];
@@ -46,3 +46,4 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
