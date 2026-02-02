@@ -1,4 +1,4 @@
-const CACHE_NAME = "sebha-cache-v3";
+const CACHE_NAME = "sebha-cache-v4";
 
 const FILES_TO_CACHE = [
   "./",
@@ -6,6 +6,10 @@ const FILES_TO_CACHE = [
   "./manifest.json",
   "./service-worker.js",
   "./recurring-appointment.png",
+  "./Alexandria-Regular.woff2",
+  "./Alexandria-Regular.woff",
+  "./Montserrat-Medium.woff2",
+  "./Montserrat-Medium.woff",
   "./back.jfif",
   "./8.png"
 
@@ -46,5 +50,6 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
 
