@@ -10,6 +10,7 @@ const FILES_TO_CACHE = [
   "./Alexandria-Regular.woff",
   "./Montserrat-Medium.woff2",
   "./Montserrat-Medium.woff",
+  "./Amiri-Regular.woff2",
   "./back.jfif",
   "./8.png"
 
@@ -50,6 +51,7 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
 
 
