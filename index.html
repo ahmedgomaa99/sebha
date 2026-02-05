@@ -32,7 +32,7 @@
 }
   @font-face {
     font-family: 'Amiri';
-    src: url('Amiri-Regular.woff2') format('woff2'),
+    src: url('Amiri-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -99,6 +99,8 @@
   gap: 40px;
   width: 90vw;      /* يزيد العرض */
   max-width: 400px; /* حد أقصى أنيق */
+  margin-top: 140px; /* ← نزول لتحت */
+
 }
 
 .counter,.reset-btn:focus {
@@ -121,7 +123,7 @@
     color: #5a2423;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 50%;
-    border: 3px solid #5a2423;
+    /* border: 3px solid #5a2423; */
     box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     backdrop-filter: blur(15px);
     text-align: center;
@@ -149,7 +151,7 @@
                                  
     border-radius: 50%;
     background: rgba(90, 36, 35, 0.7);
-    color: white
+    color: white;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -279,6 +281,66 @@
 .modal-buttons button:active {
   transform: scale(0.95);
 }
+/* Toast مبروك */
+.toast {
+  position: fixed;
+  top: 21%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  background: rgba(255,255,255,0.95);
+  color: #5a2423;
+  padding: 22px 40px;
+  border-radius: 26px;
+  font-family: 'Alexandria', sans-serif;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+  opacity: 0;
+  z-index: 3000;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  min-width: 260px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.toast-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.toast-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.toast-text span {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #8b3a3a;
+}
+
+/* فقاقيع الاحتفال */
+.bubble {
+  position: fixed;
+  bottom: -20px;
+  width: 14px;
+  height: 14px;
+  background: rgba(255, 215, 0, 0.9);
+  border-radius: 50%;
+  animation: rise 2s ease-out forwards;
+  z-index: 2500;
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
 
 </style>
 </head>
@@ -301,7 +363,12 @@ if ('serviceWorker' in navigator) {
 
     <div class="top-text">  ﴾ فَسَبِّحْ بِحَمْدِ رَبِّكَ وَكُن مِّنَ السَّاجِدِينَ ﴿  </div>
 
-
+<div id="toast" class="toast">
+  <div class="toast-title">🎉 مبروك 🎉</div>
+  <div class="toast-text">
+    وصلت إلى <span id="toastNum"></span> تسبيحة
+  </div>
+</div>
   <div id="celebrateModal" class="modal">
   <div class="modal-content">
     <h3>🎉 مبروك 🎉</h3>
@@ -331,6 +398,10 @@ if ('serviceWorker' in navigator) {
 <script>
   let count = 0;
   const counter = document.getElementById('counter');
+  const toast = document.getElementById('toast');
+const toastNum = document.getElementById('toastNum');
+
+
 
   // استرجاع العدد من LocalStorage عند تحميل الصفحة
   if (localStorage.getItem('count')) {
@@ -348,22 +419,27 @@ counter.addEventListener('click', () => {
   if (navigator.vibrate) {
 
     if (count === 10000) {
-      navigator.vibrate([800, 100, 800, 100, 800]);
-      showCelebrateModal(10000);
-       count = 0;
-        counter.innerText = count;
-       localStorage.setItem('count', count);
+       navigator.vibrate([1000, 100, 1000, 100, 1000]);
+  // showCelebrateModal(10000);
+  showToast(10000);
+  createBubbles();
+
+  count = 0;
+  counter.innerText = count;
+  localStorage.setItem('count', count);
       
     }  
 
     // 🎉 عند كل 1000
-   else if (count % 1000 === 0) {
-      navigator.vibrate([600, 100, 600, 100, 600]);
-      showCelebrateModal(count);
+   else if (count %1000 == 0) {
+       navigator.vibrate([600, 100, 600, 100, 600]);
+        // showCelebrateModal(count);   // المودال
+        showToast(count);            // رسالة مبروك
+        createBubbles();             // فقاقيع
     }
 
     // 🔔 عند كل 100
-    else if (count % 100 === 0) {
+    else if (count  %100 == 0) {
       navigator.vibrate(150);
     }
   }
@@ -459,6 +535,26 @@ celebrateOk.addEventListener('click', () => {
 });
 
 
+function showToast(num) {
+  toastNum.innerText = num;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 1400);
+}
+
+function createBubbles() {
+  for (let i = 0; i < 25; i++) {
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.style.left = Math.random() * 100 + 'vw';
+    bubble.style.animationDuration = (1.5 + Math.random()) + 's';
+    document.body.appendChild(bubble);
+
+    setTimeout(() => bubble.remove(), 2000);
+  }
+}
 
 
 </script>
