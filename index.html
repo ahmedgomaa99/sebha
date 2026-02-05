@@ -541,7 +541,7 @@ function showToast(num) {
 
   setTimeout(() => {
     toast.classList.remove('show');
-  }, 1400);
+  }, 3000);
 }
 
 function createBubbles() {
@@ -552,7 +552,7 @@ function createBubbles() {
     bubble.style.animationDuration = (1.5 + Math.random()) + 's';
     document.body.appendChild(bubble);
 
-    setTimeout(() => bubble.remove(), 2000);
+    setTimeout(() => bubble.remove(), 3000);
   }
 }
 
@@ -577,6 +577,7 @@ function createBubbles() {
 
 </body>
 </html>
+
 
 
 
