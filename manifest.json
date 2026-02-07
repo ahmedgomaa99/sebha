@@ -8,7 +8,7 @@
   "theme_color": "#0d6efd",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/ahmedgomaa99/sebha/main/8.png",
+      "src": "8.png",
       "sizes": "192x192",
       "type": "image/png"
     },
@@ -19,3 +19,4 @@
     }
   ]
 }
+
